@@ -1,4 +1,4 @@
-
+#Nuestro catalogo de ventas de autos
 catalogo_venta = {
     "Audi R8": {"marca": "Audi", "modelo": "R8", "precio": 130000},
     "Toyota Supra": {"marca": "Toyota", "modelo": "Supra mk4", "precio": 112000},
@@ -7,7 +7,7 @@ catalogo_venta = {
     "Chevrolet Camaro": {"marca": "Chevrolet", "modelo": "Camaro ZL1", "precio": 75900},
     "Porsche 911": {"marca": "Porsche", "modelo": "911 Carrera", "precio": 61200} 
     }
-
+#Nuestro catalogo de renta de autos
 catalogo_renta = {
     "Nissan Frontier" : {"marca": "Nissan", "modelo": "Frontier", "precio": 57.00},
     "Mazda CX-5" : {"marca": "Mazda", "modelo": "CX-5", "precio": 42.00},
@@ -17,6 +17,7 @@ catalogo_renta = {
     "BMW X4" : {"marca": "BMW", "modelo": "X4", "precio": 95.00},
     "Toyota Raize" : {"marca": "Toyota", "modelo": "Raize", "precio": 40.00}
     }
+
 
 
    
