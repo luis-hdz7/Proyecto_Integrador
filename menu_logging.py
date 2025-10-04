@@ -1,13 +1,14 @@
 from logging import logging
 from crear_cuenta import crear_cuenta
-
+#Modulo usado para preguntar al usuario que opción desea realizar
 def menu_logging():
 
     print("¿Ya tienes una cuenta con nosotros?, inicia sesión o registrate a continuación.")
     print("1. Iniciar sesión")
     print("2. Registrarse")
 
-    opcion = input("Elige una de las opciones: ")
+    opcion = input("""Elige una de las opciones:
+> """)
     if opcion == "1":    
         return logging()
     if opcion == "2":
@@ -15,3 +16,4 @@ def menu_logging():
     else:
         print("Opción no valida, intente con 1 o 2.\n")
         return menu_logging()
+
