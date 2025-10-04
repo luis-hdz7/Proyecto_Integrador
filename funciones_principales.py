@@ -3,29 +3,29 @@ from catalogos import catalogo_venta, catalogo_renta
 
 #Compra y renta de Autos
 
-
+#Saluda al usuario
 def saludar(nombre, apellido):
     print(f"Hola {nombre} {apellido}, bienvenido al concesionario.\n")
 
 
 
 def mostrar_menu():
-    print("Que acción desea realizar?")
-    print("1. Comprar un auto")
-    print("2. Rentar un auto")
-    print("3. Salir")
-    opciones = input("Elige una opcion 1, 2 o 3: ").strip()
+    opciones = input("""Elige una opcion:
+1. Comprar un auto
+2. Rentar un auto
+3. Salir
+> """).strip()
     print("")
     return opciones
 
 
-
+#Le muestra al usuario los auto disponibles en venta
 def mostrar_auto_venta():
     print("🚗 Autos disponibles en venta:\n ")
     for nombre, datos in catalogo_venta.items():
         print(f"-{nombre}: Modelo: {datos['modelo']}, ${datos['precio']:,}")
         print("")
-
+#Le muestra al usuario los auto disponibles en renta
 def mostrar_auto_renta():
     print("🚗 Autos disponibles en renta:\n ")
     for nombre, datos in catalogo_renta.items():
@@ -42,7 +42,7 @@ def buscar_auto_renta(nombre_auto):
 def metodo_pago():
 
     print("Metodos de pago validos:  Efectivo | Tarjeta | Transferencia")
-
+#Comportamiento del código dependiendo del metodo de pago
     while True:
         metodo = input("Ingrese su metodo de pago: ").strip().capitalize()
         if metodo in ["Efectivo", "Tarjeta", "Transferencia"]:
@@ -76,4 +76,5 @@ def metodo_pago():
             print("❌ Opcion de pago no valida, intente nuevamente.")
 
     
+
 
