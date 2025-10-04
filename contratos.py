@@ -1,7 +1,9 @@
 from  datetime import datetime
-
+#Contrato en caso de que el usuario decida comprar un auto
 def contrato_compra(nombre_vendedor, nombre_comprador, auto, precio, metodo_pago ):
     fecha_emision = datetime.now().strftime("%d/%m/%Y a las %H:%M horas")
+    #datetime.now() devuelve la hora y fecha al momento de ejecución
+    # strftime(...) → da formato a esa fecha y hora en forma de texto
     print("\n📄 Generando contrato de compraventa del auto..\n ")
 
     
@@ -55,12 +57,14 @@ def contrato_compra(nombre_vendedor, nombre_comprador, auto, precio, metodo_pago
     print(contrato)
     return contrato
 
-
+#Contrato en caso de que el usuario decida comprar un auto
 def contrato_renta(nombre_proveedor, nombre_cliente, auto, dias, metodo_pago ):
     
     precio_dia = auto['precio']
     total = precio_dia * dias
     fecha_emision = datetime.now().strftime("%d/%m/%Y a las %H:%M horas")
+    #datetime.now() devuelve la hora y fecha al momento de ejecución
+    # strftime(...) → da formato a esa fecha y hora en forma de texto
     print("\n📄 Generando contrato de renta del auto..\n ")
 
 
@@ -122,4 +126,5 @@ def contrato_renta(nombre_proveedor, nombre_cliente, auto, dias, metodo_pago ):
     """
     print(contrato)
     return contrato
+
 
