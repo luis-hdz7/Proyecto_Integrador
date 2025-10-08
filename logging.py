@@ -14,7 +14,6 @@ def logging():
     email = input("Email: ")
     patron_email = r'^[\w\.-]+@[\w\.-]+\.\w+$'#Esta expresión regular verifica que la cadena tenga una estructura básica del tipo usuario@dominio.extension
     if not re.match(patron_email, email):
-    if not re.match(patron_email, email):
         errores.append("Email no válido, no cumple con el formato válido.")
 
     password = input("Password: ")
@@ -31,3 +30,4 @@ def logging():
         print("✅ Datos procesados correctamente.\n")
 
         return email, password
+
