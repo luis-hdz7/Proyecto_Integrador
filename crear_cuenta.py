@@ -1,6 +1,6 @@
 import re
 import os 
-import json
+import sqlite3
 from helpers import capitalizar
 errores = []
 
@@ -27,36 +27,13 @@ def crear_cuenta():
 
 
     email = input("Email: ")
-    patron_email = r'^[\w\.-]+@[\w\.-]+\.\w+$'#Esta expresión regular verifica que la cadena tenga una estructura básica del tipo usuario@dominio.extension
+    patron_email = r'^[\w\.-]+@[\w\.-]+\.\w+$'
     if not re.match(patron_email, email):
         errores.append("Email no válido, no cumple con el formato establecido.")
     
     password = input("Password: ")
     if len(password) > 15 or len(password) < 8:
         errores.append("La contraseña debe tener entre 8 y 15 carácteres.")
-
-    else:
-        if not os.path.exists("usuarios.json"):
-            with open("usuarios.json", "w") as archivo:
-                json.dump({}, archivo) 
-    
-        with open("usuarios.json", "r") as archivo:
-            usuarios_registrados = json.load(archivo)
-
-       
-            if email in usuarios_registrados:
-                print("¡Ya existe una cuenta registrada con ese email!, inicie sesión.")
-            else:
-                usuarios_registrados[email] = {
-                    "nombre": nombre,
-                    "apellido": apellido,
-                    "password": password
-                }
-        # Se agrega un nuevo perfil de usuario
-                with open("usuarios.json", "w") as archivo:
-                    json.dump(usuarios_registrados, archivo, indent = 4)
-                    print("✅ Usuario registrado exitosamente.\n")
-    
     
 
     if errores:
@@ -66,5 +43,21 @@ def crear_cuenta():
         print("Corrija los errores e intente nuevamente.\n")
         return crear_cuenta()
     else:
-
+        agregar_usuario(nombre, apellido, email, password)
         return nombre, apellido, email, password
+
+
+def agregar_usuario(nombre, apellido, email, contraseña):
+    conn = sqlite3.connect('registro_users.db')
+    cursor = conn.cursor()
+    try:
+        cursor.execute('''
+            INSERT INTO usuarios (nombre, apellido, email, contraseña)
+            VALUES (?, ?, ?, ?)
+        ''', (nombre, apellido, email, contraseña))
+        conn.commit()
+        print("✅ Usuario agregado correctamente")
+    except sqlite3.IntegrityError:
+        print("⚠️ El email ya está registrado, inicia sesión o cambia el email")
+    finally:
+        conn.close()
