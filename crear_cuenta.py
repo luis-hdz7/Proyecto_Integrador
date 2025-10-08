@@ -27,7 +27,7 @@ def crear_cuenta():
 
 
     email = input("Email: ")
-    patron_email = r'^[\w\.-]+@[\w\.-]+\.\w+$'
+    patron_email = r'^[\w\.-]+@[\w\.-]+\.\w+$'#Esta expresión regular verifica que la cadena tenga una estructura básica del tipo usuario@dominio.extension
     if not re.match(patron_email, email):
         errores.append("Email no válido, no cumple con el formato establecido.")
     
@@ -66,4 +66,5 @@ def crear_cuenta():
         print("Corrija los errores e intente nuevamente.\n")
         return crear_cuenta()
     else:
+
         return nombre, apellido, email, password
