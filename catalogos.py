@@ -14,10 +14,11 @@ catalogo_renta = {
     "Geely COOLRAY" : {"marca": "Geely", "modelo": "COOLRAY", "precio": 52.00},
     "Ford Focus" : {"marca": "Ford", "modelo": "Focus", "precio": 38.00},
     "MINI Cooper" : {"marca": "MINI", "modelo": "Cooper S", "precio": 27.00},
-    "BMW X4" : {"marca": "BMW", "modelo": "X4", "precio": 95.00},
+    "BMW X1" : {"marca": "BMW", "modelo": "X1", "precio": 95.00},
     "Toyota Raize" : {"marca": "Toyota", "modelo": "Raize", "precio": 40.00}
     }
 
 
 
    
+
