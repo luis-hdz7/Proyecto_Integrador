@@ -2,6 +2,7 @@ import re
 import os 
 import sqlite3
 from helpers import capitalizar
+from base_datos import crear_tabla 
 errores = []
 
 def crear_cuenta():
@@ -48,6 +49,7 @@ def crear_cuenta():
 
 
 def agregar_usuario(nombre, apellido, email, contraseña):
+    crear_tabla()
     conn = sqlite3.connect('registro_users.db')
     cursor = conn.cursor()
     try:
@@ -61,3 +63,4 @@ def agregar_usuario(nombre, apellido, email, contraseña):
         print("⚠️ El email ya está registrado, inicia sesión o cambia el email")
     finally:
         conn.close()
+
