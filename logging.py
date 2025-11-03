@@ -1,5 +1,6 @@
 import re
 from helpers import capitalizar
+import sqlite3
 def logging():
 
     logger = """
@@ -26,8 +27,25 @@ def logging():
             print(f"- {error}")
         print("Corrija los errores e intente nuevamente.")
         return logging()
-    else:
-        print("✅ Datos procesados correctamente.\n")
+   
+    # 🔹 Verificar que el usuario exista en la base de datos
+    conn = sqlite3.connect("registro_users.db")
+    cursor = conn.cursor()
 
+    cursor.execute("SELECT contraseña FROM usuarios WHERE email = ?", (email,))
+    fila = cursor.fetchone()
+
+    conn.close()
+
+    if fila is None:
+        print("⚠️ No existe ninguna cuenta registrada con ese email.\n")
+        return logging()
+    elif fila[0] != password:
+        print("❌ Contraseña incorrecta.\n")
+        return logging()
+    else:
+        print("✅ Inicio de sesión exitoso. ¡Bienvenido!\n")
         return email, password
+
+
 
