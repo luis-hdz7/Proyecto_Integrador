@@ -15,7 +15,6 @@ def menu_principal():
     print(concesonario)
 
     nombre, apellido, email, password = menu_logging()
-    email, password = logging()
     saludar(nombre, apellido)
 
     while True:
@@ -52,5 +51,6 @@ def menu_principal():
             print("❌ Opción no valida, intente con 1, 2 o 3.")
 
             
+
 
 menu_principal()
