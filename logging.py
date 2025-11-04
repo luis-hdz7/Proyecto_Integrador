@@ -1,8 +1,8 @@
 import re
 from helpers import capitalizar
 import sqlite3
-def logging():
 
+def logging():
     logger = """
     __________________________________________
    |              INICIAR SESIÓN              |
@@ -10,42 +10,44 @@ def logging():
     """
     print(logger)
 
-    errores = []
+    while True:  # 🔁 bucle controlado (no recursivo)
+        errores = []
 
-    email = input("Email: ")
-    patron_email = r'^[\w\.-]+@[\w\.-]+\.\w+$'#Esta expresión regular verifica que la cadena tenga una estructura básica del tipo usuario@dominio.extension
-    if not re.match(patron_email, email):
-        errores.append("Email no válido, no cumple con el formato válido.")
+        email = input("Email:\n> ")
+        patron_email = r'^[\w\.-]+@[\w\.-]+\.\w+$'
+        if not re.match(patron_email, email):
+            errores.append("Email no válido, no cumple con el formato válido.")
 
-    password = input("Password: ")
-    if len(password) > 15 or len(password) < 8:
-        errores.append("La contraseña debe tener entre 8 y 15 carácteres.")
+        password = input("Password:\n> ")
+        if len(password) > 15 or len(password) < 8:
+            errores.append("La contraseña debe tener entre 8 y 15 carácteres.")
 
-    if errores:
-        print("❌ Errores encontrados:")
-        for error in errores:
-            print(f"- {error}")
-        print("Corrija los errores e intente nuevamente.")
-        return logging()
-   
-    # 🔹 Verificar que el usuario exista en la base de datos
-    conn = sqlite3.connect("registro_users.db")
-    cursor = conn.cursor()
+        if errores:
+            print("❌ Errores encontrados:")
+            for error in errores:
+                print(f"- {error}")
+            print("Corrija los errores e intente nuevamente.\n")
+            continue  # 🔁 vuelve al inicio del bucle
 
-    cursor.execute("SELECT contraseña FROM usuarios WHERE email = ?", (email,))
-    fila = cursor.fetchone()
+        # 🔹 Verificar que el usuario exista en la base de datos
+        conn = sqlite3.connect("registro_users.db")
+        cursor = conn.cursor()
 
-    conn.close()
+        cursor.execute("SELECT nombre, apellido, email, contraseña FROM usuarios WHERE email = ?", (email,))
+        fila = cursor.fetchone()
+        conn.close()
 
-    if fila is None:
-        print("⚠️ No existe ninguna cuenta registrada con ese email.\n")
-        return logging()
-    elif fila[0] != password:
-        print("❌ Contraseña incorrecta.\n")
-        return logging()
-    else:
-        print("✅ Inicio de sesión exitoso. ¡Bienvenido!\n")
-        return email, password
+        if fila is None:
+            print("⚠️ No existe ninguna cuenta registrada con ese email.\n")
+            continue  # 🔁 vuelve a pedir datos
+        elif fila[3] != password:
+            print("❌ Contraseña incorrecta.\n")
+            continue  # 🔁 vuelve a pedir datos
+        else:
+            nombre, apellido, email, contraseña = fila
+            print(f"✅ Inicio de sesión exitoso. ¡Bienvenido {nombre}!\n")
+            return nombre, apellido, email, contraseña
+
 
 
 
